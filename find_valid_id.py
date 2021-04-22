@@ -15,11 +15,11 @@ headers = {
 # made it to id 100229757
 if __name__ == '__main__':
     s = requests.Session()
-    for id in range(400283348, 499999999):
+    for id in range(500604267, 999999999):
         url = "https://lordsmobile.igg.com/project/gifts/ajax.php?game_id=1051029902"
         payload = 'ac=get_gifts&cdkey=lm001&charname=&iggid=' + str(id) + '&lang=en&type=0'
         r = s.post(url, data=payload, headers=headers)
         if not 'This IGG ID does not exist, or the game is under maintenance!' in r.text:
-            with open('vaild_id.csv', 'a') as file:
+            with open('vaild_id2.csv', 'a') as file:
                 file.write(str(id) + '\n')
         print(r.text + ' ' + str(id))
