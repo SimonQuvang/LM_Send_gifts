@@ -13,7 +13,7 @@ headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 
-for id in range(100003300, 999999999):
+for id in range(500349451, 999999999):
     payload='ac=get_gifts&cdkey=lm001&charname=&iggid=' + str(id) + '&lang=en&type=0'
     response = requests.request("POST", url, headers=headers, data=payload)
     if not 'This IGG ID does not exist, or the game is under maintenance!' in response.text:
