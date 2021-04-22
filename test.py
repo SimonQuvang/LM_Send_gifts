@@ -1,6 +1,7 @@
 import requests
 import random
 import csv
+from fake_useragent import UserAgent
 import concurrent.futures
 
 # opens a csv file of proxies and prints out the ones that work with the url in the extract function
