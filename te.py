@@ -12,9 +12,10 @@ headers = {
                   'Chrome/87.0.4280.66 Safari/537.36',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
-with requests.Session() as s:
-    requests.get(url)
-    for id in range(100153096, 499999999):
-        payload='ac=get_gifts&cdkey=lm001&charname=&iggid=' + str(id) + '&lang=en&type=0'
-        response = s. (data=payload)
-        print(response.text)
+proxies = {
+    "http": 'http://168.119.137.56:3128',
+    "https": 'http://168.119.137.56:3128'
+}
+payload = 'ac=get_gifts&cdkey=lm001&charname=&iggid=' + str(999999999) + '&lang=en&type=0'
+res = requests.get(url, proxies=proxies, data=payload, headers=headers,verify=True)
+print(res.text)
