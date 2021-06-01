@@ -1,5 +1,6 @@
-import requests
 import csv
+
+import requests
 
 url = "https://lordsmobile.igg.com/project/seiya/ajax.php?lang=en"
 

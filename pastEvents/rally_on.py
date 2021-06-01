@@ -1,9 +1,11 @@
-import requests
 import csv
+
+import requests
+
 url = "https://lordsmobile.igg.com/project/rally_on/ajax.php?game_id=1051029902"
 
 
-with open('account_name_iggid.csv') as csv_file:
+with open('../account_name_iggid.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=':')
     for row in csv_reader:
         member = row[0].strip()

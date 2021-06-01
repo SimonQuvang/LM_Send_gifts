@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 
 
 def retrieve_messages(channel_id):

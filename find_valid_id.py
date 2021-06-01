@@ -1,7 +1,3 @@
-import csv
-import logging
-import threading
-import time
 import requests
 
 url = "https://lordsmobile.igg.com/project/gifts/ajax.php?game_id=1051029902"
