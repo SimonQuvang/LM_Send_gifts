@@ -17,7 +17,7 @@ def claim_key(code, listFile):
         csv_reader = csv.reader(csv_file, delimiter=':')
         for row in csv_reader:
             member = row[1].strip()
-            payload = 'ac=get_gifts&cdkey=' + key + '&charname=' + member + '&iggid=0&lang=en&type=1'
+            payload = f'ac=get_gifts&cdkey={key}&charname={member}&iggid=0&lang=en&type=1'
             response = requests.request("POST", url, headers=headers, data=payload)
             print(response.text)
 
