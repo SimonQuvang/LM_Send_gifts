@@ -1,5 +1,5 @@
 import csv
-
+from updateMembers import get_member_data
 import requests
 
 url = "https://lordsmobile.igg.com/project/gifts/ajax.php?game_id=1051029902"
@@ -12,18 +12,19 @@ headers = {
 }
 
 
-def claim_key(code, listFile):
-    with open(listFile) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=':')
+def claim_key(gift_code, list_of_files):
+    get_member_data
+    with open(list_of_files) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
-            member = row[1].strip()
-            payload = f'ac=get_gifts&cdkey={code}&charname={member}&iggid=0&lang=en&type=1'
+            member = row[0].strip()
+            payload = f'ac=get_gifts&cdkey={gift_code}&charname={member}&iggid=0&lang=en&type=1'
             response = requests.request("POST", url, headers=headers, data=payload)
             print(response.text)
 
 
 if __name__ == '__main__':
-    list_files = ['members1.csv','members2.csv','members3.csv']
+    list_files = ['members1.csv', 'members2.csv', 'members3.csv']
     for memberList in list_files:
         with open('codes.csv') as csv_file:
             reader = csv.reader(csv_file)
