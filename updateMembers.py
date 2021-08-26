@@ -13,9 +13,8 @@ def add_member(member):
         writer.writerow(member)
 
 
-def get_data_from_website():
+def get_data_from_website(guild_name):
     session = HTMLSession()
-    guild_name = "Night+Raid"
     url = f'https://lordsmobilemaps.com/en/alliance/{guild_name}'
 
     request = session.get(url)
@@ -29,20 +28,20 @@ def get_data_from_website():
         member_name = member.select('div:nth-child(2) a')[0].string
         member_might = member.select('div:nth-child(5)')[0].string
         member_kills = member.select('div:nth-child(6)')[0].string
-        member_kingdom = member.select('div:nth-child(3) a')[0].string
+        member_kingdom = member.select('div:nth-child(3)')[0].string
 
-        row = [member_name, member_might, member_kills, member_kingdom]
+        row = [member_name, member_might, member_kills,member_kingdom]
         add_member(row)
 
 
-def get_member_data():
-    get_data_from_website()
+def get_member_data(guild_name):
+    get_data_from_website(guild_name)
 
 
-def main():
+def main(guild_name):
     cleanup()
-    get_member_data()
+    get_member_data(guild_name)
 
 
 if __name__ == '__main__':  # Makes it possible to run this code standalone
-    main()
+    main("Guild+without+Name")
