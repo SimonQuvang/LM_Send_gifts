@@ -1,6 +1,7 @@
 import csv
 import updateMembers
 import requests
+import json
 
 url = "https://lordsmobile.igg.com/project/gifts/ajax.php?game_id=1051029902"
 headers = {
@@ -11,27 +12,28 @@ headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 
-
-def claim_key(gift_code, filename):
-    with open(filename) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=':')
-        for row in csv_reader:
-            member = row[0].strip()
-            payload = f'ac=get_gifts&cdkey={gift_code}&charname={member}&iggid=0&lang=en&type=1'
-            response = requests.request("POST", url, headers=headers, data=payload)
-            print(response.text)
+def claim_for_users(gift_code, username_list):
+    for member in username_list:
+        payload = f'ac=get_gifts&cdkey={gift_code}&charname={member}&iggid=0&lang=en&type=1'
+        response = requests.request("POST", url, headers=headers, data=payload)
+        print(member, response.text)
 
 
 def main(gift_code):
     list_files = ['members1.csv', 'members3.csv']
     for memberList in list_files:
-        claim_key(gift_code, memberList)
+        username_list = list()
+        with open(memberList, 'r') as read_file:
+            reader = csv.reader(read_file,  delimiter =':')
+            for row in reader:
+                username_list.append(row[1].strip())
+        claim_for_users(gift_code, username_list)
 
 
 if __name__ == '__main__':
     # claim multiple codes from a csv file.
-    with open('codes.csv') as csv_file:
-        reader = csv.reader(csv_file)
+    with open('active_codes.csv', "r") as read_file:
+        reader = csv.reader(read_file)
         for row in reader:
             code = row[0]
             main(code)
