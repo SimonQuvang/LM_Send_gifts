@@ -3,7 +3,7 @@ import updateMembers
 import requests
 import json
 
-url = "https://lordsmobile.igg.com/project/gifts/ajax.php?game_id=1051029902"
+url = "https://lordsmobile.igg.com/gifts/"
 headers = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'X-Requested-With': 'XMLHttpRequest',
