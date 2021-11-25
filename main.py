@@ -2,6 +2,8 @@ import csv
 import updateMembers
 import requests
 import json
+from requests.sessions import Session
+
 
 url = "https://lordsmobile.igg.com/project/gifts/ajax.php?game_id=1051029902"
 headers = {
@@ -12,11 +14,19 @@ headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 
+
+def send_claim_code_request(gift_code, member_name, session):
+    payload = f'ac=get_gifts&cdkey={gift_code}&charname={member_name}&iggid=0&lang=en&type=1'
+    with session.post(url, data=payload) as response:
+        print(member_name, response.text)
+
+
 def claim_for_users(gift_code, username_list):
-    for member in username_list:
-        payload = f'ac=get_gifts&cdkey={gift_code}&charname={member}&iggid=0&lang=en&type=1'
-        response = requests.request("POST", url, headers=headers, data=payload)
-        print(member, response.text)
+    with requests.Session() as session:
+        session.headers = headers
+
+        for member in username_list:
+            send_claim_code_request(gift_code, member, session)
 
 
 def main(gift_code):
