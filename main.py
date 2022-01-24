@@ -1,4 +1,6 @@
 import csv
+import urllib
+
 import updateMembers
 import requests
 import json
@@ -16,7 +18,7 @@ headers = {
 
 
 def send_claim_code_request(gift_code, member_name, session):
-    payload = f'ac=get_gifts&cdkey={gift_code}&charname={member_name}&iggid=0&lang=en&type=1'
+    payload = f'ac=get_gifts&cdkey={urllib.parse.quote(gift_code)}&charname={member_name}&iggid=0&lang=en&type=1'
     with session.post(url, data=payload) as response:
         print(member_name, response.text)
 
